@@ -1,0 +1,905 @@
+id: 799315f8-bb93-44f0-8473-db71a5441022
+version: 88
+name: GlobalProtect-Build-DNS-Host-Records_with_DEL
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 6554b6d7-d293-47f7-8911-0127886050f8
+    type: start
+    task:
+      id: 6554b6d7-d293-47f7-8911-0127886050f8
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "30"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "1":
+    id: "1"
+    taskid: d10fe4aa-abda-4835-8a97-dbb7d583210e
+    type: regular
+    task:
+      id: d10fe4aa-abda-4835-8a97-dbb7d583210e
+      version: -1
+      name: List Connected GP Users
+      description: Gets the current Global Protect Users
+      script: '|||panos-get-current-users'
+      type: regular
+      iscommand: true
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "31"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 515
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "2":
+    id: "2"
+    taskid: ec27e176-1223-4903-85c3-5547fdb9c900
+    type: regular
+    task:
+      id: ec27e176-1223-4903-85c3-5547fdb9c900
+      version: -1
+      name: Get Existing Host Record RefID
+      description: Get Name info
+      script: Infoblox_2.10.5|||infoblox-get-refid
+      type: regular
+      iscommand: true
+      brand: Infoblox_2.10.5
+    nexttasks:
+      '#none#':
+      - "15"
+    scriptarguments:
+      domain:
+        simple: defense.local
+      host:
+        complex:
+          root: ${GlobalProtect
+          accessor: CurrentUsers.entry.computer}
+          transformers:
+          - operator: toLowerCase
+      ipadd:
+        simple: ${GlobalProtect.CurrentUsers.entry.virtual-ip}
+      status: {}
+      view: {}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 2205
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "5":
+    id: "5"
+    taskid: 7fedc475-9e84-46c3-8240-4be7f99532dd
+    type: regular
+    task:
+      id: 7fedc475-9e84-46c3-8240-4be7f99532dd
+      version: -1
+      name: Create Host Record
+      description: Add a Host record to an empty IP
+      script: Infoblox_2.10.5|||infoblox-add-host-record
+      type: regular
+      iscommand: true
+      brand: Infoblox_2.10.5
+    nexttasks:
+      '#none#':
+      - "14"
+    scriptarguments:
+      host:
+        simple: ${GlobalProtect.Hosts.Adds.name}
+      ipadd:
+        simple: ${GlobalProtect.Hosts.Adds.ipadd}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2700
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "8":
+    id: "8"
+    taskid: 59fe48a7-4f39-471c-8632-c628aad16b88
+    type: title
+    task:
+      id: 59fe48a7-4f39-471c-8632-c628aad16b88
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 4215
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "9":
+    id: "9"
+    taskid: 6ad94a08-8978-4ab9-8ae2-179de8210e3e
+    type: regular
+    task:
+      id: 6ad94a08-8978-4ab9-8ae2-179de8210e3e
+      version: -1
+      name: Extract Data From Current GP Users
+      description: commands.local.cmd.extract.indicators
+      script: Builtin|||extractIndicators
+      type: regular
+      iscommand: true
+      brand: Builtin
+    nexttasks:
+      '#none#':
+      - "29"
+    scriptarguments:
+      entryID: {}
+      filePath: {}
+      investigationID: {}
+      text:
+        simple: ${GlobalProtect.CurrentUsers.entry}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 1010
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "12":
+    id: "12"
+    taskid: 0d95bab8-4904-49f9-898c-c74358a77941
+    type: regular
+    task:
+      id: 0d95bab8-4904-49f9-898c-c74358a77941
+      version: -1
+      name: Update Host Record
+      description: Updates a host records IP address
+      script: Infoblox_2.10.5|||infoblox-update-host-record
+      type: regular
+      iscommand: true
+      brand: Infoblox_2.10.5
+    nexttasks:
+      '#none#':
+      - "25"
+    scriptarguments:
+      host:
+        simple: ${GlobalProtect.Hosts.Updates.name}
+      ipadd:
+        simple: ${GlobalProtect.Hosts.Updates.ipadd}
+      refid:
+        simple: ${GlobalProtect.Hosts.Updates.refid}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 152.5,
+          "y": 3050
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "13":
+    id: "13"
+    taskid: 7a2c5ed2-99b1-4e2d-88ac-4a1a93a1aafb
+    type: regular
+    task:
+      id: 7a2c5ed2-99b1-4e2d-88ac-4a1a93a1aafb
+      version: -1
+      name: Remove RefId
+      description: Delete field from context
+      scriptName: DeleteContext
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "17"
+    scriptarguments:
+      all: {}
+      index: {}
+      key:
+        simple: GlobalProtect.Hosts
+      keysToKeep: {}
+      subplaybook: {}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 1360
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "14":
+    id: "14"
+    taskid: 74c79de4-71b1-4eca-85cf-a2e8c7297e51
+    type: condition
+    task:
+      id: 74c79de4-71b1-4eca-85cf-a2e8c7297e51
+      version: -1
+      name: Are There Hosts To Update?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "25"
+      "yes":
+      - "12"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: GlobalProtect.Hosts.Updates
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 2875
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "15":
+    id: "15"
+    taskid: 4b7417f1-c9d1-407a-87d1-fe31f891a31e
+    type: condition
+    task:
+      id: 4b7417f1-c9d1-407a-87d1-fe31f891a31e
+      version: -1
+      name: Are There Hosts to Add?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "34"
+      "yes":
+      - "33"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: GlobalProtect.Hosts.Adds
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 2380
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "16":
+    id: "16"
+    taskid: 51ba956a-8ec0-4323-8315-2593ee8eb7a8
+    type: regular
+    task:
+      id: 51ba956a-8ec0-4323-8315-2593ee8eb7a8
+      version: -1
+      name: Set Previous Context for GP
+      description: Sets a value into the context with the given context key
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "8"
+    scriptarguments:
+      append:
+        simple: "false"
+      key:
+        simple: GlobalProtect.PreviousUsers
+      stringify: {}
+      value:
+        simple: ${GlobalProtect.CurrentUsers}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 4040
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "17":
+    id: "17"
+    taskid: 8080ba66-1b14-41e8-80e1-65c43a0d6239
+    type: condition
+    task:
+      id: 8080ba66-1b14-41e8-80e1-65c43a0d6239
+      version: -1
+      name: Are There Previous GP Users?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "27"
+      "yes":
+      - "32"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: GlobalProtect.PreviousUsers
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 1535
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "22":
+    id: "22"
+    taskid: 426469c1-02e6-4c12-87dc-f8449ecf31cd
+    type: regular
+    task:
+      id: 426469c1-02e6-4c12-87dc-f8449ecf31cd
+      version: -1
+      name: Delete Disconnected Hosts
+      script: '|||infoblox-delete-host-record'
+      type: regular
+      iscommand: true
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "28"
+    scriptarguments:
+      refid:
+        simple: ${GlobalProtect.Hosts.Deletes.refid}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3545
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "23":
+    id: "23"
+    taskid: 629d2903-0f0c-4352-8819-027ddb2b311a
+    type: regular
+    task:
+      id: 629d2903-0f0c-4352-8819-027ddb2b311a
+      version: -1
+      name: Delete Current User Table
+      description: Delete field from context
+      scriptName: DeleteContext
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "1"
+    scriptarguments:
+      all: {}
+      index: {}
+      key:
+        simple: GlobalProtect.CurrentUsers
+      keysToKeep: {}
+      subplaybook: {}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 340
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "24":
+    id: "24"
+    taskid: 06a1b09e-a66b-4cae-8161-62c2d25fe270
+    type: regular
+    task:
+      id: 06a1b09e-a66b-4cae-8161-62c2d25fe270
+      version: -1
+      name: Build Delete List for Disconnected Users
+      description: Search Global Protect users in context.  Compare previous connected
+        users to current connected users and build delete list in context to remove
+        DNS entries
+      scriptName: GPlistDisconnectUsers
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "27"
+    scriptarguments:
+      domain:
+        simple: defense.local
+      host:
+        simple: ${GlobalProtect.PreviousUsers.entry.computer}
+      ipadd:
+        simple: ${GlobalProtect.PreviousUsers.entry.virtual-ip}
+      path:
+        simple: GlobalProtect.CurrentUsers.entry.computer
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 1855
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "25":
+    id: "25"
+    taskid: 45239911-8a67-4da7-8d36-6a8deafc4adc
+    type: condition
+    task:
+      id: 45239911-8a67-4da7-8d36-6a8deafc4adc
+      version: -1
+      name: Are There Hosts To Delete?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "28"
+      "yes":
+      - "35"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: GlobalProtect.Hosts.Deletes
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 3225
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "26":
+    id: "26"
+    taskid: 84c9b0f2-a55c-4af0-8aaa-faa43acb4c5e
+    type: condition
+    task:
+      id: 84c9b0f2-a55c-4af0-8aaa-faa43acb4c5e
+      version: -1
+      name: Are There Any Users?
+      description: Check if a given value exists in the context. Will return 'no'
+        for empty empty arrays. To be used mostly with DQ and selectors.
+      scriptName: Exists
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "29"
+      "yes":
+      - "9"
+    scriptarguments:
+      value:
+        simple: ${GlobalProtect.CurrentUsers}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 835
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "27":
+    id: "27"
+    taskid: a80024f8-c806-44cc-8f33-fc851052ab3e
+    type: condition
+    task:
+      id: a80024f8-c806-44cc-8f33-fc851052ab3e
+      version: -1
+      name: Are There Any Users?
+      description: Check if a given value exists in the context. Will return 'no'
+        for empty empty arrays. To be used mostly with DQ and selectors.
+      scriptName: Exists
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      "no":
+      - "25"
+      "yes":
+      - "2"
+    scriptarguments:
+      value:
+        simple: ${GlobalProtect.CurrentUsers}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 2030
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "28":
+    id: "28"
+    taskid: 9ca71cb8-ed3c-4dc6-8d21-a87b773fbc84
+    type: condition
+    task:
+      id: 9ca71cb8-ed3c-4dc6-8d21-a87b773fbc84
+      version: -1
+      name: Are There Any Users?
+      description: Check if a given value exists in the context. Will return 'no'
+        for empty empty arrays. To be used mostly with DQ and selectors.
+      scriptName: Exists
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      "no":
+      - "8"
+      "yes":
+      - "36"
+    scriptarguments:
+      value:
+        simple: ${GlobalProtect.CurrentUsers}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 3720
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "29":
+    id: "29"
+    taskid: dd457997-e569-472f-8cb5-531ab9af50ab
+    type: condition
+    task:
+      id: dd457997-e569-472f-8cb5-531ab9af50ab
+      version: -1
+      name: Does GlobalProtect.Hosts Exists?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "17"
+      "yes":
+      - "13"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: GlobalProtect.Hosts
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 1185
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "30":
+    id: "30"
+    taskid: fa3ffe19-3f77-42cd-8cd2-6074f4cecd59
+    type: title
+    task:
+      id: fa3ffe19-3f77-42cd-8cd2-6074f4cecd59
+      version: -1
+      name: Update User Table
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "23"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 195
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "31":
+    id: "31"
+    taskid: 82277a09-ebd8-421b-845c-05ffed1397b0
+    type: title
+    task:
+      id: 82277a09-ebd8-421b-845c-05ffed1397b0
+      version: -1
+      name: Sync Previous Users to Current Users
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "26"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 690
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "32":
+    id: "32"
+    taskid: 0185c143-574f-497a-8e1f-a3753428f984
+    type: title
+    task:
+      id: 0185c143-574f-497a-8e1f-a3753428f984
+      version: -1
+      name: Create Delete Host List
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "24"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 1710
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "33":
+    id: "33"
+    taskid: 9b36585f-8927-4f8b-8964-f12437bb016e
+    type: title
+    task:
+      id: 9b36585f-8927-4f8b-8964-f12437bb016e
+      version: -1
+      name: Add DNS Records
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "5"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2555
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "34":
+    id: "34"
+    taskid: 86215a84-da8d-4a8c-8882-08f863237a0a
+    type: title
+    task:
+      id: 86215a84-da8d-4a8c-8882-08f863237a0a
+      version: -1
+      name: Update DNS Records
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "14"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 2715
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "35":
+    id: "35"
+    taskid: 4e1e89ae-acc4-4e02-8b39-f7c9b4e4ee7f
+    type: title
+    task:
+      id: 4e1e89ae-acc4-4e02-8b39-f7c9b4e4ee7f
+      version: -1
+      name: Delete DNS Records
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "22"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "36":
+    id: "36"
+    taskid: 401133f7-30cf-45ef-8ce6-1e4d37378e79
+    type: title
+    task:
+      id: 401133f7-30cf-45ef-8ce6-1e4d37378e79
+      version: -1
+      name: Current Users Becomes Previous
+      type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "16"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3895
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 4230,
+        "width": 820,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+outputs: []
+sourceplaybookid: 1bcf148e-2ab7-42a1-8481-4bf195efa054
