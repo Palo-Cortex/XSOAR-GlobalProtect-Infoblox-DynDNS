@@ -1,3 +1,12 @@
+## Requirements
+- XSOAR
+- Infoblox
+- Palo Firewall
+
+---
+## How To Video
+[![](http://img.youtube.com/vi/tBLjBgfJtVA/0.jpg)](http://www.youtube.com/watch?v=tBLjBgfJtVA "XSOAR for Global Protect / Infoblox DynDNS")
+
 ![](https://github.com/Palo-Cortex/XSOAR-GlobalProtect-Infoblox-DynDNS/blob/master/images/page1.jpg)
 ![](https://github.com/Palo-Cortex/XSOAR-GlobalProtect-Infoblox-DynDNS/blob/master/images/page2.jpg)
 ![](https://github.com/Palo-Cortex/XSOAR-GlobalProtect-Infoblox-DynDNS/blob/master/images/page3.jpg)
