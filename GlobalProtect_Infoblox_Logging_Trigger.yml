@@ -1,14 +1,15 @@
 id: 6ffc1369-7186-4e4a-89d1-89f3dd8e77d2
-version: 23
+version: 2
+vcShouldKeepItemLegacyProdMachine: false
 name: GlobalProtect Infoblox Logging Trigger
 starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: ebc594b1-da42-4a4d-8803-e4874f0933f6
+    taskid: 60673ab9-abaa-4148-897f-c37e473f43c1
     type: start
     task:
-      id: ebc594b1-da42-4a4d-8803-e4874f0933f6
+      id: 60673ab9-abaa-4148-897f-c37e473f43c1
       version: -1
       name: ""
       iscommand: false
@@ -31,10 +32,10 @@ tasks:
     quietmode: 0
   "1":
     id: "1"
-    taskid: caa3a67b-538c-45e7-8dc3-2883e35d2915
+    taskid: 68cc55ed-e5b8-4ee8-827f-42bd7f2967e0
     type: regular
     task:
-      id: caa3a67b-538c-45e7-8dc3-2883e35d2915
+      id: 68cc55ed-e5b8-4ee8-827f-42bd7f2967e0
       version: -1
       name: Extract Indicators
       description: commands.local.cmd.extract.indicators
@@ -66,10 +67,10 @@ tasks:
     quietmode: 0
   "2":
     id: "2"
-    taskid: a0021fa3-7694-43b6-8c87-c23a000a5e54
+    taskid: a1d8e50a-389e-4a98-86fe-4773f5bf9d95
     type: regular
     task:
-      id: a0021fa3-7694-43b6-8c87-c23a000a5e54
+      id: a1d8e50a-389e-4a98-86fe-4773f5bf9d95
       version: -1
       name: Set Host Details
       description: Sets a value into the context with the given context key
@@ -110,10 +111,10 @@ tasks:
     quietmode: 0
   "3":
     id: "3"
-    taskid: 0fe68781-6650-41d3-85db-9bda416e50fe
+    taskid: b3c7d43f-3a38-4b29-8d76-55a7f43c4d19
     type: regular
     task:
-      id: 0fe68781-6650-41d3-85db-9bda416e50fe
+      id: b3c7d43f-3a38-4b29-8d76-55a7f43c4d19
       version: -1
       name: Set Host Name
       description: Sets a value into the context with the given context key
@@ -156,10 +157,10 @@ tasks:
     quietmode: 0
   "4":
     id: "4"
-    taskid: f0fd0c22-4dec-47be-8872-872b22d31934
+    taskid: cb6f4fb7-421e-49a6-8a3f-74aeb0747451
     type: regular
     task:
-      id: f0fd0c22-4dec-47be-8872-872b22d31934
+      id: cb6f4fb7-421e-49a6-8a3f-74aeb0747451
       version: -1
       name: Set IP Address
       description: Sets a value into the context with the given context key
@@ -202,10 +203,10 @@ tasks:
     quietmode: 0
   "5":
     id: "5"
-    taskid: ed7282e7-fe5e-41a1-89fc-375ed0766eca
+    taskid: 025f9557-bc70-47b0-89cf-58f39855e85c
     type: condition
     task:
-      id: ed7282e7-fe5e-41a1-89fc-375ed0766eca
+      id: 025f9557-bc70-47b0-89cf-58f39855e85c
       version: -1
       name: Is Logon?
       type: condition
@@ -242,10 +243,10 @@ tasks:
     quietmode: 0
   "6":
     id: "6"
-    taskid: 64ffc75e-1c34-4ffd-844a-2e44248db12a
+    taskid: 86b4c290-5fa3-4a3c-8b91-3916b01848cf
     type: condition
     task:
-      id: 64ffc75e-1c34-4ffd-844a-2e44248db12a
+      id: 86b4c290-5fa3-4a3c-8b91-3916b01848cf
       version: -1
       name: Is Logout?
       type: condition
@@ -282,10 +283,10 @@ tasks:
     quietmode: 0
   "7":
     id: "7"
-    taskid: e349a029-bd7e-4259-80a1-4e7ab0a8d0cd
+    taskid: 26f8339a-8484-4288-8fb0-eb5c659631f2
     type: regular
     task:
-      id: e349a029-bd7e-4259-80a1-4e7ab0a8d0cd
+      id: 26f8339a-8484-4288-8fb0-eb5c659631f2
       version: -1
       name: Set State To Login
       description: Sets a value into the context with the given context key
@@ -318,10 +319,10 @@ tasks:
     quietmode: 0
   "8":
     id: "8"
-    taskid: e302349e-cdca-49a4-8906-798797241e74
+    taskid: 960dc6e8-52f7-4645-887a-da02b1f2d301
     type: regular
     task:
-      id: e302349e-cdca-49a4-8906-798797241e74
+      id: 960dc6e8-52f7-4645-887a-da02b1f2d301
       version: -1
       name: Set State To Logout
       description: Sets a value into the context with the given context key
@@ -354,10 +355,10 @@ tasks:
     quietmode: 0
   "9":
     id: "9"
-    taskid: dc39ab2e-0b21-4d80-8549-5c77bbf0f8ee
+    taskid: 2e93a07a-416d-4d85-827d-4f047138b844
     type: title
     task:
-      id: dc39ab2e-0b21-4d80-8549-5c77bbf0f8ee
+      id: 2e93a07a-416d-4d85-827d-4f047138b844
       version: -1
       name: Done
       type: title
@@ -378,15 +379,15 @@ tasks:
     quietmode: 0
   "10":
     id: "10"
-    taskid: b8b60fc8-fb31-499b-8ec1-89622931ffc5
+    taskid: c25d0d3a-1fcf-4e21-8a52-47ec66368868
     type: regular
     task:
-      id: b8b60fc8-fb31-499b-8ec1-89622931ffc5
+      id: c25d0d3a-1fcf-4e21-8a52-47ec66368868
       version: -1
       name: Get Infoblox Host RecordID For Deletes
       description: Return RefID on Records and  place in context GlobalProtect.Hosts
         (Adds, Updates, or Deletes)
-      script: '|||infoblox-get-refid'
+      script: '|||gp-infoblox-get-refid'
       type: regular
       iscommand: true
       brand: ""
@@ -418,15 +419,15 @@ tasks:
     quietmode: 0
   "11":
     id: "11"
-    taskid: 89419365-0809-4ab3-8209-da69b14b869f
+    taskid: f303b10d-d85a-4fec-8251-5c127d448425
     type: regular
     task:
-      id: 89419365-0809-4ab3-8209-da69b14b869f
+      id: f303b10d-d85a-4fec-8251-5c127d448425
       version: -1
       name: Get Infoblox Host RecordID For Updates / Adds
       description: Return RefID on Records and  place in context GlobalProtect.Hosts
         (Adds, Updates, or Deletes)
-      script: '|||infoblox-get-refid'
+      script: '|||gp-infoblox-get-refid'
       type: regular
       iscommand: true
       brand: ""
@@ -457,10 +458,10 @@ tasks:
     quietmode: 0
   "12":
     id: "12"
-    taskid: 38441c19-8ed8-40c1-84e7-0857d9612a49
+    taskid: defb30d3-72aa-49f5-8352-c50248215996
     type: condition
     task:
-      id: 38441c19-8ed8-40c1-84e7-0857d9612a49
+      id: defb30d3-72aa-49f5-8352-c50248215996
       version: -1
       name: Add Host Record?
       type: condition
@@ -494,10 +495,10 @@ tasks:
     quietmode: 0
   "13":
     id: "13"
-    taskid: 69bbf29f-a221-406a-8aa0-207de0444a8d
+    taskid: beb88c7f-389d-46da-8d78-38a15d2e3895
     type: condition
     task:
-      id: 69bbf29f-a221-406a-8aa0-207de0444a8d
+      id: beb88c7f-389d-46da-8d78-38a15d2e3895
       version: -1
       name: Update Host Record?
       type: condition
@@ -531,14 +532,14 @@ tasks:
     quietmode: 0
   "14":
     id: "14"
-    taskid: 3e14bec9-68cd-4e62-865a-1875f8e09c96
+    taskid: 25734487-4daa-4039-8fe8-669e0aac11ab
     type: regular
     task:
-      id: 3e14bec9-68cd-4e62-865a-1875f8e09c96
+      id: 25734487-4daa-4039-8fe8-669e0aac11ab
       version: -1
       name: Create Host Record
       description: Add a Host record to an empty IP
-      script: '|||infoblox-add-host-record'
+      script: '|||gp-infoblox-add-host-record'
       type: regular
       iscommand: true
       brand: ""
@@ -565,14 +566,14 @@ tasks:
     quietmode: 0
   "15":
     id: "15"
-    taskid: 0a957257-3cbd-4d10-8224-fadcae834c51
+    taskid: 92aaa18d-de10-4c75-8f39-38adb14a29c5
     type: regular
     task:
-      id: 0a957257-3cbd-4d10-8224-fadcae834c51
+      id: 92aaa18d-de10-4c75-8f39-38adb14a29c5
       version: -1
       name: Update Host Record
       description: Updates a host records IP address
-      script: '|||infoblox-update-host-record'
+      script: '|||gp-infoblox-update-host-record'
       type: regular
       iscommand: true
       brand: ""
@@ -601,10 +602,10 @@ tasks:
     quietmode: 0
   "16":
     id: "16"
-    taskid: 1ec4d4f2-9da5-4e6e-8ba6-56582bd0348a
+    taskid: cc03e0c4-3143-4616-8411-d25b25a1c204
     type: regular
     task:
-      id: 1ec4d4f2-9da5-4e6e-8ba6-56582bd0348a
+      id: cc03e0c4-3143-4616-8411-d25b25a1c204
       version: -1
       name: Close Case
       description: commands.local.cmd.close.inv
@@ -638,13 +639,13 @@ tasks:
     quietmode: 0
   "17":
     id: "17"
-    taskid: 771b85fd-c8af-47e1-8903-8a7154a0735f
+    taskid: 5f8b5b6c-1db5-4886-8f67-9836cf0090d1
     type: regular
     task:
-      id: 771b85fd-c8af-47e1-8903-8a7154a0735f
+      id: 5f8b5b6c-1db5-4886-8f67-9836cf0090d1
       version: -1
       name: Delete Record
-      script: '|||infoblox-delete-host-record'
+      script: '|||gp-infoblox-delete-host-record'
       type: regular
       iscommand: true
       brand: ""
@@ -669,10 +670,10 @@ tasks:
     quietmode: 0
   "18":
     id: "18"
-    taskid: e60cf84b-3911-46bc-8aa4-4a55bab7ead8
+    taskid: b31ec375-044d-43c5-8df8-8293b248930e
     type: title
     task:
-      id: e60cf84b-3911-46bc-8aa4-4a55bab7ead8
+      id: b31ec375-044d-43c5-8df8-8293b248930e
       version: -1
       name: Get Remote Host Information
       type: title
@@ -696,10 +697,10 @@ tasks:
     quietmode: 0
   "19":
     id: "19"
-    taskid: 95b11931-1d78-4e78-8bde-08c2cfc29fb9
+    taskid: 8e4ec007-9bd1-4738-8c52-208b3bcb26f9
     type: title
     task:
-      id: 95b11931-1d78-4e78-8bde-08c2cfc29fb9
+      id: 8e4ec007-9bd1-4738-8c52-208b3bcb26f9
       version: -1
       name: On Logon
       type: title
@@ -723,10 +724,10 @@ tasks:
     quietmode: 0
   "20":
     id: "20"
-    taskid: cbb163f1-5b17-49ab-8f42-133a6493d29d
+    taskid: a1e06108-74d4-4a73-82cf-c031ebc9091e
     type: title
     task:
-      id: cbb163f1-5b17-49ab-8f42-133a6493d29d
+      id: a1e06108-74d4-4a73-82cf-c031ebc9091e
       version: -1
       name: On Logout
       type: title
@@ -750,10 +751,10 @@ tasks:
     quietmode: 0
   "21":
     id: "21"
-    taskid: 6b5224cd-46db-4a09-86ad-6817ae03ac54
+    taskid: 6c747c22-f93d-402e-8baf-6af3f0dccb96
     type: title
     task:
-      id: 6b5224cd-46db-4a09-86ad-6817ae03ac54
+      id: 6c747c22-f93d-402e-8baf-6af3f0dccb96
       version: -1
       name: Delete DNS Record
       type: title
@@ -777,10 +778,10 @@ tasks:
     quietmode: 0
   "22":
     id: "22"
-    taskid: 8434e6ec-26cf-48bb-8d71-41c3b977f13c
+    taskid: 7414c813-8c14-4050-8c46-7e35d6b98be1
     type: title
     task:
-      id: 8434e6ec-26cf-48bb-8d71-41c3b977f13c
+      id: 7414c813-8c14-4050-8c46-7e35d6b98be1
       version: -1
       name: Update DNS Record
       type: title
@@ -804,10 +805,10 @@ tasks:
     quietmode: 0
   "23":
     id: "23"
-    taskid: 93e6dadd-3025-432b-8727-b0dfd6acf2d0
+    taskid: 8a5be293-36ec-461e-8692-e0c5a33e8beb
     type: title
     task:
-      id: 93e6dadd-3025-432b-8727-b0dfd6acf2d0
+      id: 8a5be293-36ec-461e-8692-e0c5a33e8beb
       version: -1
       name: Create DNS Record
       type: title
