@@ -1,14 +1,15 @@
 id: 1bcf148e-2ab7-42a1-8481-4bf195efa054
-version: 74
+version: 2
+vcShouldKeepItemLegacyProdMachine: false
 name: GlobalProtect-Build-DNS-Host-Records
 starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: 6554b6d7-d293-47f7-8911-0127886050f8
+    taskid: 60dab33c-5b56-4e48-8a89-d06b50a5c0e1
     type: start
     task:
-      id: 6554b6d7-d293-47f7-8911-0127886050f8
+      id: 60dab33c-5b56-4e48-8a89-d06b50a5c0e1
       version: -1
       name: ""
       iscommand: false
@@ -31,10 +32,10 @@ tasks:
     quietmode: 0
   "1":
     id: "1"
-    taskid: d10fe4aa-abda-4835-8a97-dbb7d583210e
+    taskid: 5a54924c-551a-4cf3-8e08-603367ce5bab
     type: regular
     task:
-      id: d10fe4aa-abda-4835-8a97-dbb7d583210e
+      id: 5a54924c-551a-4cf3-8e08-603367ce5bab
       version: -1
       name: List Connected GP Users
       description: Gets the current Global Protect Users
@@ -60,21 +61,23 @@ tasks:
     quietmode: 0
   "2":
     id: "2"
-    taskid: ec27e176-1223-4903-85c3-5547fdb9c900
+    taskid: 40d6cb57-d3a6-40e8-8766-16ef9bb94bbf
     type: regular
     task:
-      id: ec27e176-1223-4903-85c3-5547fdb9c900
+      id: 40d6cb57-d3a6-40e8-8766-16ef9bb94bbf
       version: -1
       name: Get Existing Host Record RefID
-      description: Get Name info
-      script: Infoblox_2.10.5|||infoblox-get-refid
+      description: Return RefID on Records and  place in context GlobalProtect.Hosts
+        (Adds, Updates, or Deletes)
+      script: '|||gp-infoblox-get-refid'
       type: regular
       iscommand: true
-      brand: Infoblox_2.10.5
+      brand: ""
     nexttasks:
       '#none#':
       - "15"
     scriptarguments:
+      deletes: {}
       domain:
         simple: defense.local
       host:
@@ -102,17 +105,17 @@ tasks:
     quietmode: 0
   "5":
     id: "5"
-    taskid: 7fedc475-9e84-46c3-8240-4be7f99532dd
+    taskid: 0cfe7cab-335c-41a0-8d5c-0909348c8d45
     type: regular
     task:
-      id: 7fedc475-9e84-46c3-8240-4be7f99532dd
+      id: 0cfe7cab-335c-41a0-8d5c-0909348c8d45
       version: -1
       name: Create Host Record
       description: Add a Host record to an empty IP
-      script: Infoblox_2.10.5|||infoblox-add-host-record
+      script: '|||gp-infoblox-add-host-record'
       type: regular
       iscommand: true
-      brand: Infoblox_2.10.5
+      brand: ""
     nexttasks:
       '#none#':
       - "14"
@@ -136,10 +139,10 @@ tasks:
     quietmode: 0
   "7":
     id: "7"
-    taskid: 28ea3a11-77dc-4626-8714-768808115cb1
+    taskid: bf89b2e8-b3ae-4810-8e05-4b7a4b20f8b5
     type: regular
     task:
-      id: 28ea3a11-77dc-4626-8714-768808115cb1
+      id: bf89b2e8-b3ae-4810-8e05-4b7a4b20f8b5
       version: -1
       name: Close Case
       description: commands.local.cmd.close.inv
@@ -176,10 +179,10 @@ tasks:
     quietmode: 0
   "8":
     id: "8"
-    taskid: 59fe48a7-4f39-471c-8632-c628aad16b88
+    taskid: 92eba8b2-d731-40e2-88cb-be43f52172c3
     type: title
     task:
-      id: 59fe48a7-4f39-471c-8632-c628aad16b88
+      id: 92eba8b2-d731-40e2-88cb-be43f52172c3
       version: -1
       name: Done
       type: title
@@ -200,10 +203,10 @@ tasks:
     quietmode: 0
   "9":
     id: "9"
-    taskid: 6ad94a08-8978-4ab9-8ae2-179de8210e3e
+    taskid: ac8220bf-5337-4551-8571-88c85252c085
     type: regular
     task:
-      id: 6ad94a08-8978-4ab9-8ae2-179de8210e3e
+      id: ac8220bf-5337-4551-8571-88c85252c085
       version: -1
       name: Extract Data From Current GP Users
       description: commands.local.cmd.extract.indicators
@@ -235,10 +238,10 @@ tasks:
     quietmode: 0
   "10":
     id: "10"
-    taskid: 8aceb6ba-084c-4305-8731-d0ebad543f1e
+    taskid: 0ec89cdd-9f57-4b48-8395-3cfe0e2a9b7c
     type: regular
     task:
-      id: 8aceb6ba-084c-4305-8731-d0ebad543f1e
+      id: 0ec89cdd-9f57-4b48-8395-3cfe0e2a9b7c
       version: -1
       name: Extract Indicators from Incident
       description: commands.local.cmd.extract.indicators
@@ -270,17 +273,17 @@ tasks:
     quietmode: 0
   "12":
     id: "12"
-    taskid: 0d95bab8-4904-49f9-898c-c74358a77941
+    taskid: fbbee664-069c-484a-8d14-da57280eb8b1
     type: regular
     task:
-      id: 0d95bab8-4904-49f9-898c-c74358a77941
+      id: fbbee664-069c-484a-8d14-da57280eb8b1
       version: -1
       name: Update Host Record
       description: Updates a host records IP address
-      script: Infoblox_2.10.5|||infoblox-update-host-record
+      script: '|||gp-infoblox-update-host-record'
       type: regular
       iscommand: true
-      brand: Infoblox_2.10.5
+      brand: ""
     nexttasks:
       '#none#':
       - "7"
@@ -306,10 +309,10 @@ tasks:
     quietmode: 0
   "13":
     id: "13"
-    taskid: 7a2c5ed2-99b1-4e2d-88ac-4a1a93a1aafb
+    taskid: f7ec317f-0ca8-486f-8429-025b5df448db
     type: regular
     task:
-      id: 7a2c5ed2-99b1-4e2d-88ac-4a1a93a1aafb
+      id: f7ec317f-0ca8-486f-8429-025b5df448db
       version: -1
       name: Remove RefId
       description: Delete field from context
@@ -342,10 +345,10 @@ tasks:
     quietmode: 0
   "14":
     id: "14"
-    taskid: 4adeff10-832d-4262-8477-7ab92d1153c4
+    taskid: 5f5cfb7a-5eb0-47c5-8a2d-1b4809db7854
     type: condition
     task:
-      id: 4adeff10-832d-4262-8477-7ab92d1153c4
+      id: 5f5cfb7a-5eb0-47c5-8a2d-1b4809db7854
       version: -1
       name: Are There Hosts To Update?
       type: condition
@@ -379,10 +382,10 @@ tasks:
     quietmode: 0
   "15":
     id: "15"
-    taskid: 4b7417f1-c9d1-407a-87d1-fe31f891a31e
+    taskid: c678ecfb-ffc2-48f2-8622-31a6a0da5cc8
     type: condition
     task:
-      id: 4b7417f1-c9d1-407a-87d1-fe31f891a31e
+      id: c678ecfb-ffc2-48f2-8622-31a6a0da5cc8
       version: -1
       name: Are There Hosts to Add?
       type: condition
@@ -416,10 +419,10 @@ tasks:
     quietmode: 0
   "16":
     id: "16"
-    taskid: 9d7cea54-dccb-4a19-8bcc-20c3bf351ff4
+    taskid: 68ea09bc-e14e-4733-81ce-ab0c6df51a22
     type: title
     task:
-      id: 9d7cea54-dccb-4a19-8bcc-20c3bf351ff4
+      id: 68ea09bc-e14e-4733-81ce-ab0c6df51a22
       version: -1
       name: Update User Table
       type: title
@@ -443,10 +446,10 @@ tasks:
     quietmode: 0
   "17":
     id: "17"
-    taskid: 41f61bc9-0e61-40cb-861a-6783a76ce5cc
+    taskid: 6b687963-e88e-46bd-84aa-bcfc3205e438
     type: title
     task:
-      id: 41f61bc9-0e61-40cb-861a-6783a76ce5cc
+      id: 6b687963-e88e-46bd-84aa-bcfc3205e438
       version: -1
       name: Create DNS Record
       type: title
@@ -470,10 +473,10 @@ tasks:
     quietmode: 0
   "18":
     id: "18"
-    taskid: ab2d8fbb-4a1a-4823-8888-c28788d3b5ef
+    taskid: af279bba-ebd7-48b7-8da1-c7edbec03d2a
     type: title
     task:
-      id: ab2d8fbb-4a1a-4823-8888-c28788d3b5ef
+      id: af279bba-ebd7-48b7-8da1-c7edbec03d2a
       version: -1
       name: Update DNS Record
       type: title
